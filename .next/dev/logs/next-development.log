@@ -1,0 +1,7 @@
+[00:00:01.070] Server  LOG     ✓ Ready in 700ms
+[00:00:04.365] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:23.414] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
+[00:00:25.115] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
+[00:00:33.119] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:35.563] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[04:36:52.179] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
