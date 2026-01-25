@@ -10,15 +10,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 const API_URL = ("TURBOPACK compile-time value", "https://towerads-backend.onrender.com");
 async function api(path, options = {}) {
     const token = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem("admin_token") : "TURBOPACK unreachable";
+    const headers = {
+        ...token ? {
+            Authorization: `Bearer ${token}`
+        } : {},
+        ...options.headers || {}
+    };
+    if (options.body) {
+        headers["Content-Type"] = "application/json";
+    }
     const res = await fetch(`${API_URL}${path}`, {
+        mode: "cors",
+        credentials: "include",
         ...options,
-        headers: {
-            "Content-Type": "application/json",
-            ...token ? {
-                Authorization: `Bearer ${token}`
-            } : {},
-            ...options.headers || {}
-        }
+        headers
     });
     if (!res.ok) {
         const text = await res.text();
@@ -39,14 +44,17 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/api.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
+;
 function ProvidersPage() {
     _s();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [rows, setRows] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // чтобы не дергать бек при каждом движении слайдера
@@ -143,7 +151,7 @@ function ProvidersPage() {
                                 children: "Providers"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 108,
+                                lineNumber: 116,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -151,13 +159,13 @@ function ProvidersPage() {
                                 children: "Manage traffic distribution between ad providers"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 109,
+                                lineNumber: 117,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 115,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -166,13 +174,13 @@ function ProvidersPage() {
                         children: "Add provider"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 114,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                lineNumber: 106,
+                lineNumber: 114,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -186,7 +194,7 @@ function ProvidersPage() {
                                 children: "Providers"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 122,
+                                lineNumber: 130,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
@@ -194,13 +202,13 @@ function ProvidersPage() {
                                 children: rows.length
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 131,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 121,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -211,7 +219,7 @@ function ProvidersPage() {
                                 children: "Active"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 127,
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
@@ -219,13 +227,13 @@ function ProvidersPage() {
                                 children: activeCount
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 128,
+                                lineNumber: 136,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 126,
+                        lineNumber: 134,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -236,7 +244,7 @@ function ProvidersPage() {
                                 children: "Traffic"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 132,
+                                lineNumber: 140,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
@@ -247,7 +255,7 @@ function ProvidersPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 133,
+                                lineNumber: 141,
                                 columnNumber: 11
                             }, this),
                             !trafficValid && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -255,13 +263,13 @@ function ProvidersPage() {
                                 children: "must be 100%"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 141,
-                                columnNumber: 13
+                                lineNumber: 144,
+                                columnNumber: 29
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 131,
+                        lineNumber: 139,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -272,7 +280,7 @@ function ProvidersPage() {
                                 children: "Fill rate"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 146,
+                                lineNumber: 148,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
@@ -280,19 +288,19 @@ function ProvidersPage() {
                                 children: "96%"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 147,
+                                lineNumber: 149,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 145,
+                        lineNumber: 147,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                lineNumber: 120,
+                lineNumber: 128,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -308,21 +316,21 @@ function ProvidersPage() {
                                             children: "Provider"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                            lineNumber: 156,
+                                            lineNumber: 158,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Status"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                            lineNumber: 157,
+                                            lineNumber: 159,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Traffic"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                            lineNumber: 158,
+                                            lineNumber: 160,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -331,18 +339,18 @@ function ProvidersPage() {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                            lineNumber: 159,
+                                            lineNumber: 161,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                    lineNumber: 155,
+                                    lineNumber: 157,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 154,
+                                lineNumber: 156,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -353,10 +361,22 @@ function ProvidersPage() {
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 className: "capitalize",
-                                                children: r.provider
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                    style: {
+                                                        cursor: "pointer",
+                                                        fontWeight: 700
+                                                    },
+                                                    onClick: ()=>router.push(`/providers/${r.provider}`),
+                                                    title: "Open provider details",
+                                                    children: r.provider
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/(admin)/providers/page.tsx",
+                                                    lineNumber: 176,
+                                                    columnNumber: 21
+                                                }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                lineNumber: 172,
+                                                lineNumber: 175,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -365,12 +385,12 @@ function ProvidersPage() {
                                                     children: r.status
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                    lineNumber: 175,
+                                                    lineNumber: 186,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                lineNumber: 174,
+                                                lineNumber: 185,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -387,7 +407,7 @@ function ProvidersPage() {
                                                         onTouchEnd: ()=>commitTraffic(r)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                        lineNumber: 187,
+                                                        lineNumber: 196,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -398,13 +418,13 @@ function ProvidersPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                        lineNumber: 199,
+                                                        lineNumber: 206,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                lineNumber: 186,
+                                                lineNumber: 195,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -416,30 +436,30 @@ function ProvidersPage() {
                                                     children: r.status === "active" ? "Disable" : "Enable"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                    lineNumber: 205,
+                                                    lineNumber: 212,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                                lineNumber: 204,
+                                                lineNumber: 211,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, `${r.placement_id}-${r.provider}`, true, {
                                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                        lineNumber: 168,
+                                        lineNumber: 170,
                                         columnNumber: 17
                                     }, this);
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                                lineNumber: 163,
+                                lineNumber: 165,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 153,
+                        lineNumber: 155,
                         columnNumber: 9
                     }, this),
                     loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -447,23 +467,27 @@ function ProvidersPage() {
                         children: "Loading…"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                        lineNumber: 223,
+                        lineNumber: 226,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/providers/page.tsx",
-                lineNumber: 152,
+                lineNumber: 154,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/providers/page.tsx",
-        lineNumber: 104,
+        lineNumber: 112,
         columnNumber: 5
     }, this);
 }
-_s(ProvidersPage, "kExNdimZxB8abaXUea4M3J5jCGM=");
+_s(ProvidersPage, "rJGQZ1VDr3DRvMIN1oujaA1/Et0=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
+    ];
+});
 _c = ProvidersPage;
 var _c;
 __turbopack_context__.k.register(_c, "ProvidersPage");

@@ -10,15 +10,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 const API_URL = ("TURBOPACK compile-time value", "https://towerads-backend.onrender.com");
 async function api(path, options = {}) {
     const token = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem("admin_token") : "TURBOPACK unreachable";
+    const headers = {
+        ...token ? {
+            Authorization: `Bearer ${token}`
+        } : {},
+        ...options.headers || {}
+    };
+    if (options.body) {
+        headers["Content-Type"] = "application/json";
+    }
     const res = await fetch(`${API_URL}${path}`, {
+        mode: "cors",
+        credentials: "include",
         ...options,
-        headers: {
-            "Content-Type": "application/json",
-            ...token ? {
-                Authorization: `Bearer ${token}`
-            } : {},
-            ...options.headers || {}
-        }
+        headers
     });
     if (!res.ok) {
         const text = await res.text();

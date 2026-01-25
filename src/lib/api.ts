@@ -9,13 +9,20 @@ export async function api(
       ? localStorage.getItem("admin_token")
       : null;
 
+  const headers: HeadersInit = {
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers || {}),
+  };
+
+  if (options.body) {
+    headers["Content-Type"] = "application/json";
+  }
+
   const res = await fetch(`${API_URL}${path}`, {
+    mode: "cors",              // 🔥 ВАЖНО
+    credentials: "include",    // 🔥 ВАЖНО (у тебя cors с credentials)
     ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {}),
-    },
+    headers,
   });
 
   if (!res.ok) {
@@ -25,3 +32,4 @@ export async function api(
 
   return res.json();
 }
+

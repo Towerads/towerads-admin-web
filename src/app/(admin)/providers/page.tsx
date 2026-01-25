@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 
 type Provider = {
@@ -8,9 +9,16 @@ type Provider = {
   provider: string;
   status: "active" | "paused";
   traffic_percentage: number;
+
+  // доп-поля (не обязаны приходить)
+  impressions?: number | string;
+  revenue?: number | string;
+  cpm?: number | string;
 };
 
 export default function ProvidersPage() {
+  const router = useRouter();
+
   const [rows, setRows] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -130,16 +138,10 @@ export default function ProvidersPage() {
 
         <div className="summary-item">
           <span className="summary-label">Traffic</span>
-          <strong
-            className={`summary-value ${
-              trafficValid ? "ok" : "danger"
-            }`}
-          >
+          <strong className={`summary-value ${trafficValid ? "ok" : "danger"}`}>
             {totalTraffic}%
           </strong>
-          {!trafficValid && (
-            <span className="summary-hint">must be 100%</span>
-          )}
+          {!trafficValid && <span className="summary-hint">must be 100%</span>}
         </div>
 
         <div className="summary-item">
@@ -169,14 +171,21 @@ export default function ProvidersPage() {
                   key={`${r.placement_id}-${r.provider}`}
                   className={disabled ? "row-disabled" : ""}
                 >
-                  <td className="capitalize">{r.provider}</td>
+                  {/* ✅ кликабельное имя → деталка провайдера */}
+                  <td className="capitalize">
+                    <span
+                      style={{ cursor: "pointer", fontWeight: 700 }}
+                      onClick={() => router.push(`/providers/${r.provider}`)}
+                      title="Open provider details"
+                    >
+                      {r.provider}
+                    </span>
+                  </td>
 
                   <td>
                     <span
                       className={
-                        r.status === "active"
-                          ? "badge-active"
-                          : "badge-paused"
+                        r.status === "active" ? "badge-active" : "badge-paused"
                       }
                     >
                       {r.status}
@@ -190,9 +199,7 @@ export default function ProvidersPage() {
                       max={100}
                       value={Number(r.traffic_percentage || 0)}
                       disabled={disabled}
-                      onChange={(e) =>
-                        updateTrafficUI(r, Number(e.target.value))
-                      }
+                      onChange={(e) => updateTrafficUI(r, Number(e.target.value))}
                       onMouseUp={() => commitTraffic(r)}
                       onTouchEnd={() => commitTraffic(r)}
                     />
@@ -204,11 +211,7 @@ export default function ProvidersPage() {
                   <td className="text-right">
                     <button
                       type="button"
-                      className={
-                        r.status === "active"
-                          ? "btn-danger"
-                          : "btn-success"
-                      }
+                      className={r.status === "active" ? "btn-danger" : "btn-success"}
                       onClick={() => toggleStatus(r)}
                     >
                       {r.status === "active" ? "Disable" : "Enable"}
@@ -225,3 +228,4 @@ export default function ProvidersPage() {
     </div>
   );
 }
+

@@ -18,6 +18,9 @@ type Row = {
   provider: string;
   impressions: number | string;
   revenue: number | string;
+  cost?: number | string;   // ✅ ДОБАВЛЕНО
+  profit?: number | string; // ✅ ДОБАВЛЕНО
+  cpm?: number | string;    // ✅ ДОБАВЛЕНО
 };
 
 export default function AnalyticsPage() {
@@ -26,12 +29,10 @@ export default function AnalyticsPage() {
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // нужен для Recharts + Next App Router
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // загрузка данных с бэка
   useEffect(() => {
     setLoading(true);
     api(`/admin/stats/providers?period=${period}`)
@@ -39,7 +40,6 @@ export default function AnalyticsPage() {
       .finally(() => setLoading(false));
   }, [period]);
 
-  // totals
   const totals = useMemo(() => {
     const totalImpressions = rows.reduce(
       (sum, r) => sum + Number(r.impressions || 0),
@@ -49,10 +49,18 @@ export default function AnalyticsPage() {
       (sum, r) => sum + Number(r.revenue || 0),
       0
     );
-    return { totalImpressions, totalRevenue };
+    const totalCost = rows.reduce(
+      (sum, r) => sum + Number(r.cost || 0),
+      0
+    );
+    const totalProfit = totalRevenue - totalCost;
+
+    const cpm =
+      totalImpressions > 0 ? (totalRevenue / totalImpressions) * 1000 : 0;
+
+    return { totalImpressions, totalRevenue, totalCost, totalProfit, cpm };
   }, [rows]);
 
-  // chart data
   const chartData = useMemo(() => {
     return rows.map((r) => ({
       provider: r.provider,
@@ -61,21 +69,24 @@ export default function AnalyticsPage() {
     }));
   }, [rows]);
 
+  function showCPM(r: Row) {
+    const imps = Number(r.impressions || 0);
+    if (imps < 10) return "—"; // чтобы не было $100 на 1 показе
+    if (r.cpm !== undefined) return `$${Number(r.cpm).toFixed(2)}`;
+    const rev = Number(r.revenue || 0);
+    return `$${((rev / imps) * 1000).toFixed(2)}`;
+  }
+
   return (
     <div className="page-inner">
-      {/* ===== Header ===== */}
       <div className="page-header">
         <div>
           <h1 className="page-title">Analytics</h1>
-          <p className="page-subtitle">
-            Providers performance for selected period
-          </p>
+          <p className="page-subtitle">Providers performance for selected period</p>
         </div>
       </div>
 
-      {/* ===== Split layout ===== */}
       <div className="split-layout">
-        {/* ===== Left panel ===== */}
         <aside className="side-panel">
           <div className="panel-title">Overview</div>
 
@@ -99,6 +110,24 @@ export default function AnalyticsPage() {
               <span>Revenue</span>
               <strong>${totals.totalRevenue.toFixed(2)}</strong>
             </div>
+
+            {/* ✅ ДОБАВЛЕНО */}
+            <div className="stat-row">
+              <span>Cost</span>
+              <strong>${totals.totalCost.toFixed(2)}</strong>
+            </div>
+
+            {/* ✅ ДОБАВЛЕНО */}
+            <div className="stat-row">
+              <span>Profit</span>
+              <strong>${totals.totalProfit.toFixed(2)}</strong>
+            </div>
+
+            {/* ✅ ДОБАВЛЕНО */}
+            <div className="stat-row">
+              <span>CPM</span>
+              <strong>{totals.totalImpressions < 10 ? "—" : `$${totals.cpm.toFixed(2)}`}</strong>
+            </div>
           </div>
 
           <div className="panel-divider" />
@@ -117,9 +146,7 @@ export default function AnalyticsPage() {
           </div>
         </aside>
 
-        {/* ===== Right content ===== */}
         <section className="main-panel">
-          {/* ===== Chart ===== */}
           <div className="chart-card">
             <div className="chart-head">
               <div className="chart-title">Revenue / Impressions</div>
@@ -141,15 +168,8 @@ export default function AnalyticsPage() {
                       stroke="rgba(255,255,255,0.08)"
                       strokeDasharray="3 3"
                     />
-                    <XAxis
-                      dataKey="provider"
-                      stroke="#94a3b8"
-                      fontSize={12}
-                    />
-                    <YAxis
-                      stroke="#94a3b8"
-                      fontSize={12}
-                    />
+                    <XAxis dataKey="provider" stroke="#94a3b8" fontSize={12} />
+                    <YAxis stroke="#94a3b8" fontSize={12} />
                     <Tooltip
                       contentStyle={{
                         background: "#020617",
@@ -158,23 +178,14 @@ export default function AnalyticsPage() {
                       }}
                     />
                     <Legend />
-                    <Bar
-                      dataKey="impressions"
-                      fill="#38bdf8"
-                      radius={[6, 6, 0, 0]}
-                    />
-                    <Bar
-                      dataKey="revenue"
-                      fill="#a855f7"
-                      radius={[6, 6, 0, 0]}
-                    />
+                    <Bar dataKey="impressions" fill="#38bdf8" radius={[6, 6, 0, 0]} />
+                    <Bar dataKey="revenue" fill="#a855f7" radius={[6, 6, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               )}
             </div>
           </div>
 
-          {/* ===== Table ===== */}
           <div className="table-card">
             <table className="table">
               <thead>
@@ -182,6 +193,13 @@ export default function AnalyticsPage() {
                   <th>Provider</th>
                   <th>Impressions</th>
                   <th>Revenue ($)</th>
+
+                  {/* ✅ ДОБАВЛЕНО */}
+                  <th>Cost ($)</th>
+                  {/* ✅ ДОБАВЛЕНО */}
+                  <th>Profit ($)</th>
+
+                  <th>CPM ($)</th>
                 </tr>
               </thead>
 
@@ -191,6 +209,13 @@ export default function AnalyticsPage() {
                     <td className="capitalize">{r.provider}</td>
                     <td>{Number(r.impressions || 0)}</td>
                     <td>${Number(r.revenue || 0).toFixed(2)}</td>
+
+                    {/* ✅ ДОБАВЛЕНО */}
+                    <td>${Number(r.cost || 0).toFixed(2)}</td>
+                    {/* ✅ ДОБАВЛЕНО */}
+                    <td>${Number(r.profit || (Number(r.revenue || 0) - Number(r.cost || 0))).toFixed(2)}</td>
+
+                    <td>{showCPM(r)}</td>
                   </tr>
                 ))}
               </tbody>

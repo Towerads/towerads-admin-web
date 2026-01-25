@@ -1,7 +1,7 @@
-[00:00:01.070] Server  LOG     ✓ Ready in 700ms
-[00:00:04.365] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:23.414] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
-[00:00:25.115] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
-[00:00:33.119] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:35.563] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:36:52.179] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
+[00:00:00.944] Server  LOG     ✓ Ready in 590ms
+[00:00:04.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:34.492] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:15.150] Server  LOG     ✓ Compiled in 32ms
+[00:08:14.133] Server  LOG     ✓ Compiled in 23ms
+[00:08:16.792] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:13:27.060] Server  LOG     ✓ Compiled in 359ms

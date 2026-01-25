@@ -9,13 +9,18 @@ __turbopack_context__.s([
 const API_URL = ("TURBOPACK compile-time value", "https://towerads-backend.onrender.com");
 async function api(path, options = {}) {
     const token = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : null;
+    const headers = {
+        ...("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : {},
+        ...options.headers || {}
+    };
+    if (options.body) {
+        headers["Content-Type"] = "application/json";
+    }
     const res = await fetch(`${API_URL}${path}`, {
+        mode: "cors",
+        credentials: "include",
         ...options,
-        headers: {
-            "Content-Type": "application/json",
-            ...("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : {},
-            ...options.headers || {}
-        }
+        headers
     });
     if (!res.ok) {
         const text = await res.text();
