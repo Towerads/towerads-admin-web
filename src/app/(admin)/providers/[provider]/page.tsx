@@ -11,6 +11,12 @@ type StatRow = {
   cpm?: number | string;
 };
 
+const PERIOD_LABELS = {
+  today: "Сегодня",
+  "7d": "7 дней",
+  "30d": "30 дней",
+} as const;
+
 export default function ProviderDetailPage() {
   const router = useRouter();
   const params = useParams();
@@ -30,11 +36,10 @@ export default function ProviderDetailPage() {
   }, [provider, period]);
 
   const current = useMemo(() => {
-    const found = rows.find(
-      (r) => String(r.provider || "").toLowerCase() === provider
-    );
     return (
-      found ?? {
+      rows.find(
+        (r) => String(r.provider || "").toLowerCase() === provider
+      ) ?? {
         provider,
         impressions: 0,
         revenue: 0,
@@ -46,45 +51,51 @@ export default function ProviderDetailPage() {
   const impressions = Number(current.impressions || 0);
   const revenue = Number(current.revenue || 0);
 
-  // если бэк не прислал cpm — считаем
-  const cpmValue = current.cpm !== undefined ? Number(current.cpm || 0) : 0;
-
   const prettyCPM =
     impressions < 10
       ? "—"
-      : `$${(current.cpm !== undefined ? cpmValue : (revenue / impressions) * 1000).toFixed(
-          2
-        )}`;
+      : `$${(
+          current.cpm !== undefined
+            ? Number(current.cpm)
+            : (revenue / impressions) * 1000
+        ).toFixed(2)}`;
 
   return (
     <div className="page-inner">
-      <div className="page-header" style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <div className="page-header" style={{ display: "flex", gap: 16 }}>
         <div style={{ flex: 1 }}>
-          <h1 className="page-title" style={{ textTransform: "capitalize" }}>
-            {provider}
-          </h1>
-          <p className="page-subtitle">Provider analytics for selected period</p>
+          <h1 className="page-title capitalize">{provider}</h1>
+          <p className="page-subtitle">
+            Аналитика провайдера за выбранный период
+          </p>
         </div>
 
-        <button className="btn-secondary" onClick={() => router.push("/providers")}>
-          Back
+        <button
+          className="btn-secondary"
+          onClick={() => router.push("/providers")}
+        >
+          Назад
         </button>
       </div>
 
       <div className="providers-summary" style={{ marginBottom: 16 }}>
         <div className="summary-item">
-          <span className="summary-label">Period</span>
-          <strong className="summary-value">{period}</strong>
+          <span className="summary-label">Период</span>
+          <strong className="summary-value">
+            {PERIOD_LABELS[period]}
+          </strong>
         </div>
 
         <div className="summary-item">
-          <span className="summary-label">Impressions</span>
+          <span className="summary-label">Показы</span>
           <strong className="summary-value">{impressions}</strong>
         </div>
 
         <div className="summary-item">
-          <span className="summary-label">Revenue</span>
-          <strong className="summary-value">${revenue.toFixed(2)}</strong>
+          <span className="summary-label">Доход</span>
+          <strong className="summary-value">
+            ${revenue.toFixed(2)}
+          </strong>
         </div>
 
         <div className="summary-item">
@@ -100,9 +111,8 @@ export default function ProviderDetailPage() {
               key={p}
               className={`filter ${period === p ? "active" : ""}`}
               onClick={() => setPeriod(p)}
-              type="button"
             >
-              {p}
+              {PERIOD_LABELS[p]}
             </button>
           ))}
         </div>
@@ -110,9 +120,9 @@ export default function ProviderDetailPage() {
         <table className="table">
           <thead>
             <tr>
-              <th>Provider</th>
-              <th>Impressions</th>
-              <th>Revenue ($)</th>
+              <th>Провайдер</th>
+              <th>Показы</th>
+              <th>Доход ($)</th>
               <th>CPM ($)</th>
             </tr>
           </thead>
@@ -126,7 +136,7 @@ export default function ProviderDetailPage() {
           </tbody>
         </table>
 
-        {loading && <div className="loading">Loading…</div>}
+        {loading && <div className="loading">Загрузка…</div>}
       </div>
     </div>
   );

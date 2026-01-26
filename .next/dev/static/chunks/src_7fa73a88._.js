@@ -53,15 +53,15 @@ var _s = __turbopack_context__.k.signature();
 const TABS = [
     {
         key: "pending",
-        label: "New requests"
+        label: "Новые заявки"
     },
     {
         key: "approved",
-        label: "Approved"
+        label: "Одобрены"
     },
     {
         key: "rejected",
-        label: "Rejected"
+        label: "Отклонены"
     }
 ];
 function CreativesPage() {
@@ -71,7 +71,6 @@ function CreativesPage() {
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [selected, setSelected] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [actionLoading, setActionLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // reject modal state
     const [rejectReason, setRejectReason] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "CreativesPage.useEffect": ()=>{
@@ -133,10 +132,10 @@ function CreativesPage() {
                         style: {
                             marginBottom: 24
                         },
-                        children: "Creatives moderation"
+                        children: "Модерация креативов"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                        lineNumber: 89,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -158,29 +157,29 @@ function CreativesPage() {
                                 children: tab.label
                             }, tab.key, false, {
                                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                lineNumber: 94,
+                                lineNumber: 92,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                        lineNumber: 92,
+                        lineNumber: 90,
                         columnNumber: 9
                     }, this),
                     loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: "Loading…"
+                        children: "Загрузка…"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                        lineNumber: 117,
+                        lineNumber: 115,
                         columnNumber: 21
                     }, this),
                     !loading && creatives.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         style: {
                             opacity: 0.6
                         },
-                        children: "No creatives"
+                        children: "Креативов нет"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                        lineNumber: 120,
+                        lineNumber: 118,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -215,7 +214,7 @@ function CreativesPage() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                        lineNumber: 141,
+                                        lineNumber: 139,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -231,7 +230,7 @@ function CreativesPage() {
                                                 children: c.advertiser_email
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                lineNumber: 155,
+                                                lineNumber: 153,
                                                 columnNumber: 17
                                             }, this),
                                             c.pricing_name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -244,12 +243,12 @@ function CreativesPage() {
                                                     " ·",
                                                     " ",
                                                     c.impressions?.toLocaleString(),
-                                                    " views · $",
+                                                    " показов · $",
                                                     c.price_usd
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                lineNumber: 160,
+                                                lineNumber: 158,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -260,13 +259,13 @@ function CreativesPage() {
                                                 children: new Date(c.created_at).toLocaleDateString()
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                lineNumber: 167,
+                                                lineNumber: 165,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                        lineNumber: 154,
+                                        lineNumber: 152,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -279,27 +278,27 @@ function CreativesPage() {
                                             background: c.status === "pending" ? "rgba(250,204,21,0.15)" : c.status === "approved" ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
                                             color: c.status === "pending" ? "#facc15" : c.status === "approved" ? "#22c55e" : "#ef4444"
                                         },
-                                        children: c.status
+                                        children: c.status === "pending" ? "Ожидает" : c.status === "approved" ? "Одобрен" : "Отклонён"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                        lineNumber: 172,
+                                        lineNumber: 170,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, c.id, true, {
                                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                lineNumber: 126,
+                                lineNumber: 124,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                        lineNumber: 124,
+                        lineNumber: 122,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                lineNumber: 88,
+                lineNumber: 86,
                 columnNumber: 7
             }, this),
             selected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -326,8 +325,7 @@ function CreativesPage() {
                         padding: 24,
                         display: "grid",
                         gridTemplateColumns: "480px 1fr",
-                        gap: 24,
-                        boxShadow: "0 30px 80px rgba(0,0,0,0.6)"
+                        gap: 24
                     },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
@@ -335,12 +333,11 @@ function CreativesPage() {
                             controls: true,
                             style: {
                                 width: "100%",
-                                borderRadius: 14,
-                                background: "#000"
+                                borderRadius: 14
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                            lineNumber: 231,
+                            lineNumber: 232,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -353,10 +350,10 @@ function CreativesPage() {
                                     style: {
                                         marginBottom: 14
                                     },
-                                    children: "Ad request"
+                                    children: "Заявка на рекламу"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                    lineNumber: 242,
+                                    lineNumber: 239,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -368,10 +365,10 @@ function CreativesPage() {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
-                                                    children: "Advertiser:"
+                                                    children: "Рекламодатель:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                    lineNumber: 246,
+                                                    lineNumber: 243,
                                                     columnNumber: 19
                                                 }, this),
                                                 " ",
@@ -379,16 +376,16 @@ function CreativesPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 245,
+                                            lineNumber: 242,
                                             columnNumber: 17
                                         }, this),
                                         selected.pricing_name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
-                                                    children: "Tariff:"
+                                                    children: "Тариф:"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                    lineNumber: 251,
+                                                    lineNumber: 248,
                                                     columnNumber: 21
                                                 }, this),
                                                 " ",
@@ -396,11 +393,11 @@ function CreativesPage() {
                                                 " ·",
                                                 " ",
                                                 selected.impressions?.toLocaleString(),
-                                                " views"
+                                                " показов"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 250,
+                                            lineNumber: 247,
                                             columnNumber: 19
                                         }, this),
                                         selected.price_usd !== undefined && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -414,7 +411,7 @@ function CreativesPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 258,
+                                            lineNumber: 254,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -423,25 +420,25 @@ function CreativesPage() {
                                                 opacity: 0.6
                                             },
                                             children: [
-                                                "Created:",
+                                                "Создано:",
                                                 " ",
                                                 new Date(selected.created_at).toLocaleString()
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 268,
+                                            lineNumber: 259,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                    lineNumber: 244,
+                                    lineNumber: 241,
                                     columnNumber: 15
                                 }, this),
                                 selected.status === "pending" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                                            placeholder: "Reject reason (required)",
+                                            placeholder: "Причина отклонения (обязательно)",
                                             value: rejectReason,
                                             onChange: (e)=>setRejectReason(e.target.value),
                                             style: {
@@ -455,7 +452,7 @@ function CreativesPage() {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 276,
+                                            lineNumber: 267,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -477,10 +474,10 @@ function CreativesPage() {
                                                         color: "#22c55e",
                                                         border: "1px solid rgba(34,197,94,0.4)"
                                                     },
-                                                    children: "Approve"
+                                                    children: "Одобрить"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                    lineNumber: 298,
+                                                    lineNumber: 283,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -496,16 +493,16 @@ function CreativesPage() {
                                                         border: "1px solid rgba(239,68,68,0.4)",
                                                         opacity: !rejectReason.trim() ? 0.5 : 1
                                                     },
-                                                    children: "Reject"
+                                                    children: "Отклонить"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                                    lineNumber: 314,
+                                                    lineNumber: 299,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                                            lineNumber: 291,
+                                            lineNumber: 282,
                                             columnNumber: 19
                                         }, this)
                                     ]
@@ -513,24 +510,24 @@ function CreativesPage() {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                            lineNumber: 241,
+                            lineNumber: 238,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                    lineNumber: 217,
+                    lineNumber: 219,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-                lineNumber: 202,
+                lineNumber: 204,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(admin)/creatives/page.tsx",
-        lineNumber: 87,
+        lineNumber: 85,
         columnNumber: 5
     }, this);
 }

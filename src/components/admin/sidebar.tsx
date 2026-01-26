@@ -7,16 +7,16 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/", label: "Dashboard" },
-    { href: "/orders", label: "Orders" },       
-    { href: "/creatives", label: "Creatives" },
-    { href: "/providers", label: "Providers" },
-    { href: "/analytics", label: "Analytics" },
+    { href: "/", label: "Панель управления" },
+    { href: "/orders", label: "Заказы" },
+    { href: "/creatives", label: "Креативы" },
+    { href: "/providers", label: "Провайдеры" },
+    { href: "/analytics", label: "Аналитика" },
   ];
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo">TowerAds Admin</div>
+      <div className="sidebar-logo">USL Admin</div>
 
       <nav className="sidebar-nav">
         {links.map((l) => {

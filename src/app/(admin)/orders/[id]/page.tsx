@@ -28,8 +28,6 @@ export default function OrderPage() {
     try {
       const res = await api(`/admin/orders/${id}`);
       setOrder(res.order);
-    } catch (e) {
-      console.error(e);
     } finally {
       setLoading(false);
     }
@@ -44,8 +42,8 @@ export default function OrderPage() {
     load();
   }, [id]);
 
-  if (loading) return <div className="page">Loading...</div>;
-  if (!order) return <div className="page">Order not found</div>;
+  if (loading) return <div className="page">Загрузка…</div>;
+  if (!order) return <div className="page">Заказ не найден</div>;
 
   const progress =
     ((order.impressions_done / order.impressions_total) * 100).toFixed(1);
@@ -53,28 +51,25 @@ export default function OrderPage() {
   return (
     <div className="page">
       <div className="page-header">
-        <h1>Order</h1>
-        <button onClick={() => router.back()}>← Back</button>
+        <h1>Заказ</h1>
+        <button onClick={() => router.back()}>← Назад</button>
       </div>
 
       <div className="card">
         <div className="order-meta">
           <div><b>ID:</b> {order.id}</div>
-          <div><b>Advertiser:</b> {order.advertiser_email}</div>
-          <div><b>Status:</b> {order.status}</div>
-          <div><b>Type:</b> {order.creative_type}</div>
-          <div><b>Price:</b> ${order.price_usd}</div>
+          <div><b>Рекламодатель:</b> {order.advertiser_email}</div>
+          <div><b>Статус:</b> {order.status}</div>
+          <div><b>Тип:</b> {order.creative_type}</div>
+          <div><b>Цена:</b> ${Number(order.price_usd).toFixed(2)}</div>
         </div>
 
         <div className="order-progress">
           <div>
-            {order.impressions_done} / {order.impressions_total} impressions
+            {order.impressions_done} / {order.impressions_total} показов
           </div>
           <div className="progress-bar">
-            <div
-              className="progress"
-              style={{ width: `${progress}%` }}
-            />
+            <div className="progress" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -88,14 +83,14 @@ export default function OrderPage() {
 
         <div className="order-actions">
           {order.status === "active" && (
-            <button onClick={() => action("pause")}>Pause</button>
+            <button onClick={() => action("pause")}>Пауза</button>
           )}
           {order.status === "paused" && (
-            <button onClick={() => action("resume")}>Resume</button>
+            <button onClick={() => action("resume")}>Продолжить</button>
           )}
           {order.status !== "completed" && (
             <button className="danger" onClick={() => action("stop")}>
-              Stop
+              Остановить
             </button>
           )}
         </div>

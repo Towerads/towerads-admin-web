@@ -18,9 +18,9 @@ type Creative = {
 };
 
 const TABS: { key: CreativeStatus; label: string }[] = [
-  { key: "pending", label: "New requests" },
-  { key: "approved", label: "Approved" },
-  { key: "rejected", label: "Rejected" },
+  { key: "pending", label: "Новые заявки" },
+  { key: "approved", label: "Одобрены" },
+  { key: "rejected", label: "Отклонены" },
 ];
 
 export default function CreativesPage() {
@@ -30,8 +30,6 @@ export default function CreativesPage() {
 
   const [selected, setSelected] = useState<Creative | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
-
-  // reject modal state
   const [rejectReason, setRejectReason] = useState("");
 
   useEffect(() => {
@@ -86,9 +84,9 @@ export default function CreativesPage() {
   return (
     <div className="page">
       <div className="page-inner">
-        <h1 style={{ marginBottom: 24 }}>Creatives moderation</h1>
+        <h1 style={{ marginBottom: 24 }}>Модерация креативов</h1>
 
-        {/* TABS */}
+        {/* ТАБЫ */}
         <div style={{ display: "flex", gap: 10, marginBottom: 24 }}>
           {TABS.map((tab) => (
             <button
@@ -114,13 +112,13 @@ export default function CreativesPage() {
           ))}
         </div>
 
-        {loading && <div>Loading…</div>}
+        {loading && <div>Загрузка…</div>}
 
         {!loading && creatives.length === 0 && (
-          <div style={{ opacity: 0.6 }}>No creatives</div>
+          <div style={{ opacity: 0.6 }}>Креативов нет</div>
         )}
 
-        {/* LIST */}
+        {/* СПИСОК */}
         <div style={{ display: "grid", gap: 14 }}>
           {creatives.map((c) => (
             <div
@@ -159,7 +157,7 @@ export default function CreativesPage() {
                 {c.pricing_name && (
                   <div style={{ fontSize: 13, opacity: 0.75 }}>
                     {c.pricing_name} ·{" "}
-                    {c.impressions?.toLocaleString()} views · $
+                    {c.impressions?.toLocaleString()} показов · $
                     {c.price_usd}
                   </div>
                 )}
@@ -190,14 +188,18 @@ export default function CreativesPage() {
                       : "#ef4444",
                 }}
               >
-                {c.status}
+                {c.status === "pending"
+                  ? "Ожидает"
+                  : c.status === "approved"
+                  ? "Одобрен"
+                  : "Отклонён"}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* МОДАЛКА */}
       {selected && (
         <div
           onClick={() => {
@@ -225,48 +227,37 @@ export default function CreativesPage() {
               display: "grid",
               gridTemplateColumns: "480px 1fr",
               gap: 24,
-              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
             }}
           >
             <video
               src={selected.media_url}
               controls
-              style={{
-                width: "100%",
-                borderRadius: 14,
-                background: "#000",
-              }}
+              style={{ width: "100%", borderRadius: 14 }}
             />
 
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <h2 style={{ marginBottom: 14 }}>Ad request</h2>
+              <h2 style={{ marginBottom: 14 }}>Заявка на рекламу</h2>
 
               <div style={{ display: "grid", gap: 10 }}>
                 <div>
-                  <b>Advertiser:</b> {selected.advertiser_email}
+                  <b>Рекламодатель:</b> {selected.advertiser_email}
                 </div>
 
                 {selected.pricing_name && (
                   <div>
-                    <b>Tariff:</b>{" "}
-                    {selected.pricing_name} ·{" "}
-                    {selected.impressions?.toLocaleString()} views
+                    <b>Тариф:</b> {selected.pricing_name} ·{" "}
+                    {selected.impressions?.toLocaleString()} показов
                   </div>
                 )}
 
                 {selected.price_usd !== undefined && (
-                  <div
-                    style={{
-                      fontSize: 26,
-                      fontWeight: 900,
-                    }}
-                  >
+                  <div style={{ fontSize: 26, fontWeight: 900 }}>
                     ${selected.price_usd}
                   </div>
                 )}
 
                 <div style={{ fontSize: 13, opacity: 0.6 }}>
-                  Created:{" "}
+                  Создано:{" "}
                   {new Date(selected.created_at).toLocaleString()}
                 </div>
               </div>
@@ -274,7 +265,7 @@ export default function CreativesPage() {
               {selected.status === "pending" && (
                 <>
                   <textarea
-                    placeholder="Reject reason (required)"
+                    placeholder="Причина отклонения (обязательно)"
                     value={rejectReason}
                     onChange={(e) => setRejectReason(e.target.value)}
                     style={{
@@ -288,13 +279,7 @@ export default function CreativesPage() {
                     }}
                   />
 
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 12,
-                      marginTop: "auto",
-                    }}
-                  >
+                  <div style={{ display: "flex", gap: 12, marginTop: "auto" }}>
                     <button
                       onClick={() => approve(selected.id)}
                       disabled={actionLoading}
@@ -308,7 +293,7 @@ export default function CreativesPage() {
                         border: "1px solid rgba(34,197,94,0.4)",
                       }}
                     >
-                      Approve
+                      Одобрить
                     </button>
 
                     <button
@@ -325,7 +310,7 @@ export default function CreativesPage() {
                         opacity: !rejectReason.trim() ? 0.5 : 1,
                       }}
                     >
-                      Reject
+                      Отклонить
                     </button>
                   </div>
                 </>
@@ -337,4 +322,3 @@ export default function CreativesPage() {
     </div>
   );
 }
-

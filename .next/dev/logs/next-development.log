@@ -1,7 +1,16 @@
-[00:00:00.944] Server  LOG     ✓ Ready in 590ms
-[00:00:04.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:34.492] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:15.150] Server  LOG     ✓ Compiled in 32ms
-[00:08:14.133] Server  LOG     ✓ Compiled in 23ms
-[00:08:16.792] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:13:27.060] Server  LOG     ✓ Compiled in 359ms
+[00:00:00.954] Server  LOG     ✓ Ready in 609ms
+[00:00:01.483] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:54.016] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/app/(admin)/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:01:54.025] Server  LOG     ✓ Compiled in 113ms
+[00:01:54.380] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:13.728] Server  LOG     ✓ Compiled in 30ms
+[00:02:57.244] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/app/(admin)/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:02:57.253] Server  LOG     ✓ Compiled in 14ms
+[00:02:57.607] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:17.102] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./src/app/(admin)/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:05:17.275] Server  LOG     ✓ Compiled in 26ms
+[00:05:17.677] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:39.269] Server  LOG     ✓ Compiled in 27ms
+[00:09:41.766] Server  LOG     ✓ Compiled in 25ms
+[00:11:52.879] Server  LOG     ✓ Compiled in 25ms
+[00:11:57.414] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

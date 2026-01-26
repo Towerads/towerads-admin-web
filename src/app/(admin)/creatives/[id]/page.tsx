@@ -54,7 +54,7 @@ export default function CreativePage() {
 
       router.replace("/creatives");
     } catch (e) {
-      console.error("Load creative error:", e);
+      console.error("Ошибка загрузки креатива:", e);
       router.replace("/creatives");
     } finally {
       setLoading(false);
@@ -76,7 +76,7 @@ export default function CreativePage() {
   async function rejectCreative() {
     if (!creative) return;
 
-    const reason = prompt("Reject reason:");
+    const reason = prompt("Причина отклонения:");
     if (!reason?.trim()) return;
 
     setActionLoading(true);
@@ -97,22 +97,22 @@ export default function CreativePage() {
 
     switch (creative.status) {
       case "pending":
-        return { label: "Awaiting moderation", color: "#facc15" };
+        return { label: "Ожидает модерации", color: "#facc15" };
       case "approved":
-        return { label: "Approved", color: "#22c55e" };
+        return { label: "Одобрен", color: "#22c55e" };
       case "rejected":
-        return { label: "Rejected", color: "#ef4444" };
+        return { label: "Отклонён", color: "#ef4444" };
       default:
         return { label: creative.status, color: "#93c5fd" };
     }
   }, [creative]);
 
-  if (loading) return <div className="page">Loading…</div>;
+  if (loading) return <div className="page">Загрузка…</div>;
   if (!creative || !statusUi) return null;
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: 24 }}>Creative review</h1>
+      <h1 style={{ marginBottom: 24 }}>Просмотр креатива</h1>
 
       <div
         style={{
@@ -143,20 +143,20 @@ export default function CreativePage() {
           }}
         >
           <p>
-            <b>Status:</b>{" "}
+            <b>Статус:</b>{" "}
             <span style={{ color: statusUi.color, fontWeight: 700 }}>
               {statusUi.label}
             </span>
           </p>
 
           <p>
-            <b>Advertiser:</b> {creative.advertiser_email}
+            <b>Рекламодатель:</b> {creative.advertiser_email}
           </p>
           <p>
-            <b>Type:</b> {creative.type}
+            <b>Тип:</b> {creative.type}
           </p>
           <p>
-            <b>Created:</b>{" "}
+            <b>Создан:</b>{" "}
             {new Date(creative.created_at).toLocaleString()}
           </p>
 
@@ -167,7 +167,7 @@ export default function CreativePage() {
                 disabled={actionLoading}
                 style={{ background: "#22c55e", padding: "10px 16px" }}
               >
-                Approve
+                Одобрить
               </button>
 
               <button
@@ -175,7 +175,7 @@ export default function CreativePage() {
                 disabled={actionLoading}
                 style={{ background: "#ef4444", padding: "10px 16px" }}
               >
-                Reject
+                Отклонить
               </button>
             </div>
           )}

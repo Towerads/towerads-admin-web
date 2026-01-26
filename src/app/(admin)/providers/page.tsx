@@ -10,7 +10,6 @@ type Provider = {
   status: "active" | "paused";
   traffic_percentage: number;
 
-  // доп-поля (не обязаны приходить)
   impressions?: number | string;
   revenue?: number | string;
   cpm?: number | string;
@@ -22,7 +21,6 @@ export default function ProvidersPage() {
   const [rows, setRows] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // чтобы не дергать бек при каждом движении слайдера
   const pendingTrafficRef = useRef<Record<string, number>>({});
 
   // --------------------
@@ -73,7 +71,6 @@ export default function ProvidersPage() {
   const commitTraffic = async (row: Provider) => {
     const key = `${row.placement_id}__${row.provider}`;
     const value = pendingTrafficRef.current[key];
-
     if (value === undefined) return;
 
     await api("/admin/mediation/traffic", {
@@ -110,55 +107,45 @@ export default function ProvidersPage() {
   // --------------------
   return (
     <div className="page-inner">
-      {/* ===== Header ===== */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Providers</h1>
+          <h1 className="page-title">Провайдеры</h1>
           <p className="page-subtitle">
-            Manage traffic distribution between ad providers
+            Управление распределением трафика между рекламными провайдерами
           </p>
         </div>
-
-        <button type="button" className="btn-secondary">
-          Add provider
-        </button>
       </div>
 
-      {/* ===== Compact summary bar ===== */}
       <div className="providers-summary">
         <div className="summary-item">
-          <span className="summary-label">Providers</span>
+          <span className="summary-label">Всего провайдеров</span>
           <strong className="summary-value">{rows.length}</strong>
         </div>
 
         <div className="summary-item">
-          <span className="summary-label">Active</span>
+          <span className="summary-label">Активные</span>
           <strong className="summary-value">{activeCount}</strong>
         </div>
 
         <div className="summary-item">
-          <span className="summary-label">Traffic</span>
+          <span className="summary-label">Трафик</span>
           <strong className={`summary-value ${trafficValid ? "ok" : "danger"}`}>
             {totalTraffic}%
           </strong>
-          {!trafficValid && <span className="summary-hint">must be 100%</span>}
-        </div>
-
-        <div className="summary-item">
-          <span className="summary-label">Fill rate</span>
-          <strong className="summary-value">96%</strong>
+          {!trafficValid && (
+            <span className="summary-hint">должно быть 100%</span>
+          )}
         </div>
       </div>
 
-      {/* ===== Table ===== */}
       <div className="table-card">
         <table className="table">
           <thead>
             <tr>
-              <th>Provider</th>
-              <th>Status</th>
-              <th>Traffic</th>
-              <th style={{ width: 140 }} />
+              <th>Провайдер</th>
+              <th>Статус</th>
+              <th>Трафик</th>
+              <th style={{ width: 160 }} />
             </tr>
           </thead>
 
@@ -171,12 +158,10 @@ export default function ProvidersPage() {
                   key={`${r.placement_id}-${r.provider}`}
                   className={disabled ? "row-disabled" : ""}
                 >
-                  {/* ✅ кликабельное имя → деталка провайдера */}
                   <td className="capitalize">
                     <span
                       style={{ cursor: "pointer", fontWeight: 700 }}
                       onClick={() => router.push(`/providers/${r.provider}`)}
-                      title="Open provider details"
                     >
                       {r.provider}
                     </span>
@@ -185,10 +170,12 @@ export default function ProvidersPage() {
                   <td>
                     <span
                       className={
-                        r.status === "active" ? "badge-active" : "badge-paused"
+                        r.status === "active"
+                          ? "badge-active"
+                          : "badge-paused"
                       }
                     >
-                      {r.status}
+                      {r.status === "active" ? "Активен" : "Пауза"}
                     </span>
                   </td>
 
@@ -199,7 +186,9 @@ export default function ProvidersPage() {
                       max={100}
                       value={Number(r.traffic_percentage || 0)}
                       disabled={disabled}
-                      onChange={(e) => updateTrafficUI(r, Number(e.target.value))}
+                      onChange={(e) =>
+                        updateTrafficUI(r, Number(e.target.value))
+                      }
                       onMouseUp={() => commitTraffic(r)}
                       onTouchEnd={() => commitTraffic(r)}
                     />
@@ -211,10 +200,14 @@ export default function ProvidersPage() {
                   <td className="text-right">
                     <button
                       type="button"
-                      className={r.status === "active" ? "btn-danger" : "btn-success"}
+                      className={
+                        r.status === "active"
+                          ? "btn-danger"
+                          : "btn-success"
+                      }
                       onClick={() => toggleStatus(r)}
                     >
-                      {r.status === "active" ? "Disable" : "Enable"}
+                      {r.status === "active" ? "Отключить" : "Включить"}
                     </button>
                   </td>
                 </tr>
@@ -223,9 +216,8 @@ export default function ProvidersPage() {
           </tbody>
         </table>
 
-        {loading && <div className="loading">Loading…</div>}
+        {loading && <div className="loading">Загрузка…</div>}
       </div>
     </div>
   );
 }
-

@@ -30,12 +30,8 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // 🔍 поиск
   const [query, setQuery] = useState("");
-  // 🎯 фильтр статуса
   const [status, setStatus] = useState<OrderStatus | "">("");
-
-  /* ---------- LOAD ORDERS ---------- */
 
   async function loadOrders(q = query, s = status) {
     try {
@@ -49,23 +45,16 @@ export default function OrdersPage() {
       const res = await api(`/admin/orders?${params.toString()}`);
       setOrders(res.items || []);
     } catch (e: any) {
-      setError(e.message || "Failed to load orders");
+      setError(e.message || "Ошибка загрузки заказов");
     } finally {
       setLoading(false);
     }
   }
 
-  /* ---------- AUTO SEARCH + FILTER (DEBOUNCE) ---------- */
-
   useEffect(() => {
-    const t = setTimeout(() => {
-      loadOrders();
-    }, 300); // 👈 debounce
-
+    const t = setTimeout(loadOrders, 300);
     return () => clearTimeout(t);
   }, [query, status]);
-
-  /* ---------- ACTIONS ---------- */
 
   async function orderAction(
     id: string,
@@ -75,17 +64,15 @@ export default function OrdersPage() {
     loadOrders();
   }
 
-  /* ================= RENDER ================= */
-
   return (
     <div style={{ padding: 28 }}>
-      <h1 style={title}>Orders</h1>
-      <p style={subtitle}>Manage all creative orders</p>
+      <h1 style={title}>Заказы</h1>
+      <p style={subtitle}>Управление рекламными заказами</p>
 
-      {/* 🔍 SEARCH + FILTER */}
+      {/* ===== SEARCH + FILTER ===== */}
       <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
         <input
-          placeholder="Search by title / id / email"
+          placeholder="Поиск по ID / email"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           style={input}
@@ -96,37 +83,30 @@ export default function OrdersPage() {
           onChange={(e) => setStatus(e.target.value as any)}
           style={select}
         >
-          <option value="">all</option>
-          <option value="active">active</option>
-          <option value="paused">paused</option>
-          <option value="completed">completed</option>
+          <option value="">Все</option>
+          <option value="active">Активные</option>
+          <option value="paused">Пауза</option>
+          <option value="completed">Завершённые</option>
         </select>
       </div>
 
+      {/* ===== TABLE ===== */}
       <div style={card}>
-        {/* HEADER */}
         <div style={headerGrid}>
-          <div>Order</div>
-          <div>Advertiser</div>
-          <div>Type</div>
-          <div>Status</div>
-          <div>Impressions</div>
-          <div>Price</div>
-          <div>Actions</div>
+          <div>Заказ</div>
+          <div>Рекламодатель</div>
+          <div>Тип</div>
+          <div>Статус</div>
+          <div>Показы</div>
+          <div>Цена</div>
+          <div>Действия</div>
         </div>
 
-        {/* SKELETON */}
         {loading &&
-          Array.from({ length: 5 }).map((_, i) => (
-            <SkeletonRow key={i} />
-          ))}
+          Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)}
 
-        {/* ERROR */}
-        {error && (
-          <div style={{ padding: 16, color: "#ff6b6b" }}>{error}</div>
-        )}
+        {error && <div style={{ padding: 16, color: "#ff6b6b" }}>{error}</div>}
 
-        {/* DATA */}
         {!loading &&
           !error &&
           orders.map((o) => (
@@ -135,20 +115,16 @@ export default function OrdersPage() {
               style={rowGrid}
               onClick={() => router.push(`/orders/${o.id}`)}
             >
-              <div style={link}>
-                {o.title || o.id.slice(0, 8) + "…"}
-              </div>
-
+              <div style={link}>{o.id.slice(0, 8)}…</div>
               <div style={muted}>{o.advertiser_email}</div>
               <div style={pill}>{o.creative_type}</div>
               <StatusBadge status={o.status} />
-
               <div style={mono}>
                 {o.impressions_done}/{o.impressions_total}
               </div>
-
-              <div style={mono}>${o.price_usd}</div>
-
+              <div style={mono}>
+                ${Number(o.price_usd).toFixed(2)}
+              </div>
               <div onClick={(e) => e.stopPropagation()}>
                 <Actions order={o} onAction={orderAction} />
               </div>
@@ -156,7 +132,7 @@ export default function OrdersPage() {
           ))}
 
         {!loading && !error && orders.length === 0 && (
-          <div style={{ padding: 16, opacity: 0.6 }}>No orders</div>
+          <div style={{ padding: 16, opacity: 0.6 }}>Заказов нет</div>
         )}
       </div>
     </div>
@@ -176,22 +152,27 @@ function Actions({
     <div style={{ display: "flex", gap: 8 }}>
       {order.status === "active" && (
         <button style={btn} onClick={() => onAction(order.id, "pause")}>
-          Pause
+          Пауза
         </button>
       )}
 
       {order.status === "paused" && (
         <button style={btn} onClick={() => onAction(order.id, "resume")}>
-          Resume
+          Продолжить
         </button>
       )}
 
       {order.status !== "completed" && (
         <button
-          style={{ ...btn, background: "#3b1c1c" }}
+          style={{
+            ...btn,
+            background: "rgba(239,68,68,0.15)",
+            border: "1px solid rgba(239,68,68,0.3)",
+            color: "#fecaca",
+          }}
           onClick={() => onAction(order.id, "stop")}
         >
-          Stop
+          Остановить
         </button>
       )}
     </div>
@@ -200,9 +181,21 @@ function Actions({
 
 function StatusBadge({ status }: { status: OrderStatus }) {
   const map = {
-    active: { bg: "rgba(46,204,113,.2)", color: "#7dffb6" },
-    paused: { bg: "rgba(241,196,15,.2)", color: "#ffe58f" },
-    completed: { bg: "rgba(149,165,166,.2)", color: "#ccc" },
+    active: {
+      label: "Активен",
+      bg: "rgba(34,197,94,0.15)",
+      color: "#86efac",
+    },
+    paused: {
+      label: "Пауза",
+      bg: "rgba(234,179,8,0.15)",
+      color: "#fde68a",
+    },
+    completed: {
+      label: "Завершён",
+      bg: "rgba(148,163,184,0.15)",
+      color: "#cbd5f5",
+    },
   };
 
   return (
@@ -211,12 +204,13 @@ function StatusBadge({ status }: { status: OrderStatus }) {
         padding: "4px 10px",
         borderRadius: 999,
         fontSize: 12,
-        fontWeight: 700,
+        fontWeight: 600,
         background: map[status].bg,
         color: map[status].color,
+        whiteSpace: "nowrap",
       }}
     >
-      {status}
+      {map[status].label}
     </span>
   );
 }
@@ -248,16 +242,15 @@ const input = {
 const select: React.CSSProperties = {
   padding: "10px 14px",
   borderRadius: 12,
-  background: "#0f1220",
-  border: "1px solid rgba(255,255,255,0.15)",
+  background: "rgba(15,18,32,0.95)",
+  border: "1px solid rgba(255,255,255,0.12)",
   color: "#fff",
-  width: 140,
+  width: 160,
   appearance: "none",
   WebkitAppearance: "none",
   MozAppearance: "none",
   cursor: "pointer",
 };
-
 
 const card = {
   borderRadius: 18,
@@ -268,7 +261,7 @@ const card = {
 
 const headerGrid = {
   display: "grid",
-  gridTemplateColumns: "1fr 1.4fr .6fr .8fr .9fr .6fr 1fr",
+  gridTemplateColumns: "140px 240px 80px 110px 110px 90px 160px",
   padding: "14px 16px",
   fontSize: 12,
   opacity: 0.6,
@@ -277,10 +270,10 @@ const headerGrid = {
 
 const rowGrid = {
   display: "grid",
-  gridTemplateColumns: "1fr 1.4fr .6fr .8fr .9fr .6fr 1fr",
+  gridTemplateColumns: "140px 240px 80px 110px 110px 90px 160px",
   padding: "14px 16px",
-  borderBottom: "1px solid rgba(255,255,255,0.04)",
   alignItems: "center",
+  borderBottom: "1px solid rgba(255,255,255,0.04)",
   cursor: "pointer",
 };
 
@@ -292,15 +285,16 @@ const pill = {
   background: "rgba(255,255,255,0.08)",
   fontSize: 12,
 };
-const mono = { fontFamily: "monospace" };
+const mono = { fontFamily: "monospace", fontSize: 13 };
 
 const btn = {
-  padding: "6px 10px",
-  borderRadius: 10,
+  padding: "6px 12px",
+  borderRadius: 999,
   background: "rgba(255,255,255,0.08)",
   border: "1px solid rgba(255,255,255,0.12)",
   cursor: "pointer",
   fontSize: 12,
+  color: "#e5e7eb",
 };
 
 const skeleton = {
