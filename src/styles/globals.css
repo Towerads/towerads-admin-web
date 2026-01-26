@@ -1118,3 +1118,130 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 13px;
   }
 }
+/* =========================================================
+   RESPONSIVE (MOBILE / TABLET)
+========================================================= */
+
+/* ===== Tablets & small laptops ===== */
+@media (max-width: 1024px) {
+  .page {
+    padding: 24px;
+  }
+
+  .dashboard-top {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dashboard-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  /* Layout */
+  .admin {
+    flex-direction: column;
+  }
+
+  /* Sidebar -> top drawer */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 12px;
+  }
+
+  .sidebar-logo {
+    margin-bottom: 16px;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .sidebar-link {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .sidebar-link.active::before {
+    display: none;
+  }
+
+  /* Content */
+  .page {
+    padding: 20px 14px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .page-title {
+    font-size: 26px;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+  }
+
+  /* Metrics -> vertical cards */
+  .dashboard-top {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .metric-card {
+    padding: 16px;
+  }
+
+  .metric-card b {
+    font-size: 24px;
+  }
+
+  /* System status */
+  .system-status {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Split sections */
+  .dashboard-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Mini tables */
+  .mini-table {
+    font-size: 13px;
+  }
+
+  /* Alerts */
+  .alert {
+    font-size: 14px;
+  }
+}
+
+/* ===== Small phones ===== */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 22px;
+  }
+
+  .metric-card b {
+    font-size: 22px;
+  }
+
+  .sidebar-link {
+    font-size: 12px;
+  }
+}
