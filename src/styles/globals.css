@@ -919,3 +919,108 @@ input[type="range"]::-webkit-slider-thumb {
 .warn {
   color: #fbbf24;
 }
+
+/* =========================================================
+   RESPONSIVE DASHBOARD — MOBILE / TABLET
+========================================================= */
+
+/* =====<= 1200px (малые ноуты) ===== */
+@media (max-width: 1200px) {
+  .dashboard-top {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dashboard-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====<= 768px (планшеты / телефоны) ===== */
+@media (max-width: 768px) {
+  /* shell */
+  .admin {
+    flex-direction: column;
+  }
+
+  /* sidebar */
+  .sidebar {
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 6px;
+  }
+
+  .sidebar-link {
+    white-space: nowrap;
+  }
+
+  /* page */
+  .page {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+  }
+
+  /* metrics */
+  .dashboard-top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .metric-card {
+    padding: 14px;
+  }
+
+  .metric-card b {
+    font-size: 20px;
+  }
+
+  /* system status */
+  .system-status {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* blocks */
+  .dashboard-block {
+    padding: 14px;
+  }
+
+  /* tables */
+  .mini-table > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* =====<= 420px (маленькие телефоны) ===== */
+@media (max-width: 420px) {
+  .dashboard-top {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card b {
+    font-size: 18px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+}
