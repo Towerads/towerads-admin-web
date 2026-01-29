@@ -11,6 +11,7 @@ export default function Sidebar() {
     { href: "/orders", label: "Заказы" },
     { href: "/creatives", label: "Креативы" },
     { href: "/providers", label: "Провайдеры" },
+    { href: "/publishers", label: "Паблишеры" }, // ✅ ВОТ ЭТОГО НЕ ХВАТАЛО
     { href: "/analytics", label: "Аналитика" },
   ];
 
