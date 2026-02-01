@@ -8,6 +8,7 @@ type CreativeStatus = "pending" | "approved" | "rejected";
 type Creative = {
   id: string;
   type: "video" | "banner";
+  title?: string;  
   media_url: string;
   advertiser_email: string;
   status: CreativeStatus;
@@ -167,8 +168,12 @@ export default function CreativesPage() {
             )}
 
               <div style={{ display: "grid", gap: 6 }}>
-                <div style={{ fontWeight: 700 }}>
-                  {c.advertiser_email}
+                <div style={{ fontWeight: 800 }}>
+                  {c.title || "Без названия"}
+                </div>
+
+                <div style={{ fontSize: 12, opacity: 0.6 }}>
+                  рекламодатель: {c.advertiser_email}
                 </div>
 
                 {c.pricing_name && (
