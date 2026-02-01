@@ -7,6 +7,7 @@ type CreativeStatus = "pending" | "approved" | "rejected";
 
 type Creative = {
   id: string;
+  type: "video" | "banner";
   media_url: string;
   advertiser_email: string;
   status: CreativeStatus;
@@ -136,6 +137,7 @@ export default function CreativesPage() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
+            {c.type === "video" && (
               <video
                 src={c.media_url}
                 muted
@@ -148,6 +150,21 @@ export default function CreativesPage() {
                   background: "#000",
                 }}
               />
+            )}
+
+            {c.type === "banner" && (
+              <img
+                src={c.media_url}
+                alt="banner"
+                style={{
+                  width: "100%",
+                  height: 90,
+                  objectFit: "cover",
+                  borderRadius: 10,
+                  background: "#000",
+                }}
+              />
+            )}
 
               <div style={{ display: "grid", gap: 6 }}>
                 <div style={{ fontWeight: 700 }}>
@@ -229,11 +246,21 @@ export default function CreativesPage() {
               gap: 24,
             }}
           >
+          {selected.type === "video" && (
             <video
               src={selected.media_url}
               controls
               style={{ width: "100%", borderRadius: 14 }}
             />
+          )}
+
+          {selected.type === "banner" && (
+            <img
+              src={selected.media_url}
+              alt="banner"
+              style={{ width: "100%", borderRadius: 14 }}
+            />
+          )}
 
             <div style={{ display: "flex", flexDirection: "column" }}>
               <h2 style={{ marginBottom: 14 }}>Заявка на рекламу</h2>
