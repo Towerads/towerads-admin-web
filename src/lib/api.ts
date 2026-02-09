@@ -9,26 +9,35 @@ export async function api(
       ? localStorage.getItem("admin_token")
       : null;
 
+  const hasBody = options.body !== undefined && options.body !== null;
+
   const headers: HeadersInit = {
+    Accept: "application/json",
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(options.headers || {}),
+    ...(hasBody ? { "Content-Type": "application/json" } : {}),
   };
 
-  if (options.body) {
-    headers["Content-Type"] = "application/json";
-  }
-
   const res = await fetch(`${API_URL}${path}`, {
-    mode: "cors",              // 🔥 ВАЖНО
-    credentials: "include",    // 🔥 ВАЖНО (у тебя cors с credentials)
+    mode: "cors",
+    credentials: "include",
     ...options,
     headers,
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || `API error ${res.status}`);
+    const contentType = res.headers.get("content-type") || "";
+    const payload = contentType.includes("application/json")
+      ? JSON.stringify(await res.json())
+      : await res.text();
+    throw new Error(payload || `API error ${res.status}`);
   }
+
+  // на случай 204 No Content
+  if (res.status === 204) return null;
+
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) return await res.text();
 
   return res.json();
 }
