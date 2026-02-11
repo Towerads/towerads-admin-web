@@ -11,7 +11,9 @@ export default function Sidebar() {
     { href: "/orders", label: "Заказы" },
     { href: "/creatives", label: "Креативы" },
     { href: "/providers", label: "Провайдеры" },
-    { href: "/publishers", label: "Паблишеры" }, // ✅ ВОТ ЭТОГО НЕ ХВАТАЛО
+    { href: "/publishers", label: "Паблишеры" },
+    // ✅ NEW: доски паблишеров (SDK / placements moderation)
+    { href: "/publisher-placements", label: "Доски паблишеров (SDK)" },
     { href: "/analytics", label: "Аналитика" },
   ];
 
