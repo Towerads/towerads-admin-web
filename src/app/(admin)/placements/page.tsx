@@ -114,12 +114,24 @@ export default function PlacementsPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.15)" }}>
-              <th align="left" style={{ padding: 8 }}>Название</th>
-              <th align="left" style={{ padding: 8 }}>Домен / ссылка</th>
-              <th align="left" style={{ padding: 8 }}>Тип</th>
-              <th align="left" style={{ padding: 8 }}>Статус</th>
-              <th align="left" style={{ padding: 8 }}>Причина</th>
-              <th align="left" style={{ padding: 8 }}>Действия</th>
+              <th align="left" style={{ padding: 8 }}>
+                Название
+              </th>
+              <th align="left" style={{ padding: 8 }}>
+                Домен / ссылка
+              </th>
+              <th align="left" style={{ padding: 8 }}>
+                Тип
+              </th>
+              <th align="left" style={{ padding: 8 }}>
+                Статус
+              </th>
+              <th align="left" style={{ padding: 8 }}>
+                Причина
+              </th>
+              <th align="left" style={{ padding: 8 }}>
+                Действия
+              </th>
             </tr>
           </thead>
 
@@ -135,9 +147,7 @@ export default function PlacementsPage() {
                 <td style={{ padding: 8 }}>
                   <b>{statusLabel(p.moderation_status)}</b>
                 </td>
-                <td style={{ padding: 8 }}>
-                  {p.rejected_reason || "—"}
-                </td>
+                <td style={{ padding: 8 }}>{p.rejected_reason || "—"}</td>
                 <td style={{ padding: 8, display: "flex", gap: 8 }}>
                   <button
                     onClick={() => approve(p.id)}
